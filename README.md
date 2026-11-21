@@ -42,6 +42,7 @@ gitsyncra/
 | `GET` | `/health` | Server health check and uptime |
 | `GET` | `/api/telemetry/leetcode/:username` | Real-time LeetCode problem breakdown & global rank |
 | `GET` | `/api/telemetry/codeforces/:handle` | Live Codeforces rating, contest rank, and max rating |
+| `GET` | `/api/telemetry/codechef/:username` | Live CodeChef current rating, highest rating, and stars |
 | `GET` | `/api/badge/:username?cf=:handle` | **Direct Dynamic SVG Badge** rendered for GitHub READMEs |
 
 ### 🖼️ Example Badge Embed (Markdown)
