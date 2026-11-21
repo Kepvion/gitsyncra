@@ -2,6 +2,7 @@
 const express = require('express');
 const { fetchLeetCodeStats } = require('../services/leetcode.service');
 const { fetchCodeforcesStats } = require('../services/codeforces.service');
+const { fetchCodeChefStats } = require('../services/codechef.service');
 const { generateStatsBadgeSvg } = require('../services/badge.service');
 
 const router = express.Router();
@@ -22,6 +23,17 @@ router.get('/codeforces/:handle', async (req, res) => {
   try {
     const { handle } = req.params;
     const stats = await fetchCodeforcesStats(handle);
+    res.status(200).json({ success: true, data: stats });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// GET /api/telemetry/codechef/:username
+router.get('/codechef/:username', async (req, res) => {
+  try {
+    const { username } = req.params;
+    const stats = await fetchCodeChefStats(username);
     res.status(200).json({ success: true, data: stats });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
