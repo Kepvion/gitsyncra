@@ -45,16 +45,19 @@ router.get('/badge/:username', async (req, res) => {
   try {
     const { username } = req.params;
     const cfHandle = req.query.cf || username;
+    const ccHandle = req.query.cc || username;
 
-    const [lcStats, cfStats] = await Promise.all([
+    const [lcStats, cfStats, ccStats] = await Promise.all([
       fetchLeetCodeStats(username),
-      fetchCodeforcesStats(cfHandle)
+      fetchCodeforcesStats(cfHandle),
+      fetchCodeChefStats(ccHandle)
     ]);
 
     const svg = generateStatsBadgeSvg({
       username,
       leetcode: lcStats,
-      codeforces: cfStats
+      codeforces: cfStats,
+      codechef: ccStats
     });
 
     res.setHeader('Content-Type', 'image/svg+xml');
